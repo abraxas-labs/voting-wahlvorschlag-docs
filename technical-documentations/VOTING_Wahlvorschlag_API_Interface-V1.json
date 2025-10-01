@@ -227,6 +227,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "maxItems": 200,
                 "minItems": 1,
                 "type": "array",
                 "items": {
@@ -236,6 +237,7 @@
             },
             "text/json": {
               "schema": {
+                "maxItems": 200,
                 "minItems": 1,
                 "type": "array",
                 "items": {
@@ -245,6 +247,7 @@
             },
             "application/*+json": {
               "schema": {
+                "maxItems": 200,
                 "minItems": 1,
                 "type": "array",
                 "items": {
@@ -387,6 +390,63 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainOfInfluenceModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainOfInfluenceModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainOfInfluenceModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DomainOfInfluence"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModifyDomainOfInfluenceModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModifyDomainOfInfluenceModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModifyDomainOfInfluenceModel"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -1334,7 +1394,7 @@
             "name": "theme",
             "in": "query",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/Theme"
             }
           }
         ],
@@ -1494,7 +1554,7 @@
             "name": "theme",
             "in": "query",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/Theme"
             }
           }
         ],
@@ -1733,6 +1793,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "maxItems": 20,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1742,6 +1803,7 @@
             },
             "text/json": {
               "schema": {
+                "maxItems": 20,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1751,6 +1813,7 @@
             },
             "application/*+json": {
               "schema": {
+                "maxItems": 20,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1804,6 +1867,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "maxItems": 20,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1813,6 +1877,7 @@
             },
             "text/json": {
               "schema": {
+                "maxItems": 20,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1822,6 +1887,7 @@
             },
             "application/*+json": {
               "schema": {
+                "maxItems": 20,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1904,133 +1970,6 @@
           },
           {
             "name": "listId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/elections/{electionId}/lists/{listId}/candidates/{candidateId}/markings": {
-      "post": {
-        "tags": [
-          "Markings"
-        ],
-        "parameters": [
-          {
-            "name": "electionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "listId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "candidateId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModifyMarkedElementModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModifyMarkedElementModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModifyMarkedElementModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarkedElementModel"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarkedElementModel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarkedElementModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/elections/{electionId}/lists/{listId}/candidates/{candidateId}/markings/{id}": {
-      "delete": {
-        "tags": [
-          "Markings"
-        ],
-        "parameters": [
-          {
-            "name": "electionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "listId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "candidateId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -2631,7 +2570,7 @@
             "format": "uuid"
           },
           "numberOfMandates": {
-            "maximum": 2147483647,
+            "maximum": 200,
             "minimum": 1,
             "type": "integer",
             "format": "int32"
@@ -2650,10 +2589,14 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 255,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\r\\n\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "description": {
+            "maxLength": 2000,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\r\\n\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
@@ -2687,11 +2630,13 @@
             "format": "int32"
           },
           "tenantLogo": {
+            "maxLength": 30000000,
             "type": "string",
             "format": "byte",
             "nullable": true
           },
           "documents": {
+            "maxItems": 50,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ModifyBallotDocumentModel"
@@ -2699,6 +2644,7 @@
             "nullable": true
           },
           "domainsOfInfluence": {
+            "maxItems": 50,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateDomainOfInfluenceElectionModel"
@@ -2706,6 +2652,7 @@
             "nullable": true
           },
           "infoTexts": {
+            "maxItems": 100,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ModifyInfoTextModel"
@@ -2725,23 +2672,31 @@
         "type": "object",
         "properties": {
           "firstname": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "lastname": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "username": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "email": {
+            "maxLength": 50,
             "minLength": 1,
             "type": "string",
             "format": "email"
           },
           "tenants": {
+            "maxItems": 50,
             "type": "array",
             "items": {
               "type": "string"
@@ -2963,6 +2918,9 @@
               "$ref": "#/components/schemas/InfoTextModel"
             },
             "nullable": true
+          },
+          "isArchived": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -3022,6 +2980,9 @@
           "state": {
             "type": "integer",
             "format": "int32"
+          },
+          "isArchived": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -3160,6 +3121,14 @@
             "nullable": true
           },
           "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "creatorFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "creatorLastName": {
             "type": "string",
             "nullable": true
           }
@@ -3353,10 +3322,13 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "document": {
+            "maxLength": 30000000,
             "type": "string",
             "format": "byte"
           }
@@ -3389,19 +3361,27 @@
             "nullable": true
           },
           "familyName": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "firstName": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "title": {
+            "maxLength": 100,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
           "occupationalTitle": {
+            "maxLength": 250,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "dateOfBirth": {
@@ -3412,39 +3392,57 @@
             "$ref": "#/components/schemas/SexType"
           },
           "origin": {
+            "maxLength": 80,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
           "street": {
+            "maxLength": 150,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "houseNumber": {
+            "maxLength": 30,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} ]+\\z",
             "type": "string",
             "nullable": true
           },
           "zipCode": {
+            "maxLength": 20,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "locality": {
+            "maxLength": 200,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "ballotFamilyName": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "ballotFirstName": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "ballotOccupationalTitle": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "ballotLocality": {
+            "maxLength": 200,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "incumbent": {
@@ -3467,10 +3465,13 @@
             "nullable": true
           },
           "party": {
+            "maxLength": 12,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
           "markings": {
+            "maxItems": 40,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ModifyMarkedElementModel"
@@ -3489,15 +3490,21 @@
         "type": "object",
         "properties": {
           "officialId": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string"
           },
           "name": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string"
           },
           "shortName": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string"
           },
           "domainOfInfluenceType": {
@@ -3518,14 +3525,19 @@
             "nullable": true
           },
           "tenantId": {
+            "maxLength": 50,
             "type": "string",
             "nullable": true
           },
           "key": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string"
           },
           "value": {
+            "maxLength": 10000,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\r\\n\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
@@ -3539,6 +3551,8 @@
         "type": "object",
         "properties": {
           "content": {
+            "maxLength": 1000,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\r\\n\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           }
@@ -3554,10 +3568,14 @@
         "type": "object",
         "properties": {
           "responsiblePartyTenantId": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string"
           },
           "indenture": {
+            "maxLength": 10,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string",
             "nullable": true
           },
@@ -3567,10 +3585,14 @@
             "nullable": true
           },
           "name": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "description": {
+            "maxLength": 100,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
@@ -3582,8 +3604,13 @@
           "validated": {
             "type": "boolean"
           },
+          "locked": {
+            "type": "boolean"
+          },
           "representative": {
+            "maxLength": 50,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string"
           },
           "deputyUsers": {
@@ -3614,6 +3641,8 @@
             "nullable": true
           },
           "field": {
+            "maxLength": 100,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd} \\.'-]+\\z",
             "type": "string",
             "nullable": true
           }
@@ -3627,7 +3656,9 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           }
         },
@@ -3645,11 +3676,14 @@
             "nullable": true
           },
           "tenantLogo": {
+            "maxLength": 30000000,
             "type": "string",
             "format": "byte",
             "nullable": true
           },
           "wabstiExportTenantTitle": {
+            "maxLength": 1000,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           }
@@ -3664,14 +3698,19 @@
         "type": "object",
         "properties": {
           "firstname": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "lastname": {
+            "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "tenants": {
+            "maxItems": 50,
             "type": "array",
             "items": {
               "type": "string"
@@ -3704,10 +3743,6 @@
         "properties": {
           "state": {
             "$ref": "#/components/schemas/ListState"
-          },
-          "locked": {
-            "type": "boolean",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3741,11 +3776,18 @@
         ],
         "type": "string"
       },
+      "Theme": {
+        "enum": [
+          "Default",
+          "Sg"
+        ],
+        "type": "string"
+      },
       "UpdateDomainOfInfluenceElectionModel": {
         "type": "object",
         "properties": {
           "numberOfMandates": {
-            "maximum": 2147483647,
+            "maximum": 200,
             "minimum": 1,
             "type": "integer",
             "format": "int32"
@@ -3764,10 +3806,14 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 255,
             "minLength": 1,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\r\\n\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string"
           },
           "description": {
+            "maxLength": 2000,
+            "pattern": "^[\\p{L}\\p{M}\\p{Nd}\\r\\n\\t _!\\?+\\-@,\\.:'\\(\\)\\/—\\\"«»;&–`´’‘\\+\\*%=§]+\\z",
             "type": "string",
             "nullable": true
           },
@@ -3801,6 +3847,7 @@
             "format": "int32"
           },
           "tenantLogo": {
+            "maxLength": 30000000,
             "type": "string",
             "format": "byte",
             "nullable": true

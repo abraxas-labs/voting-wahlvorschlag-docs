@@ -132,6 +132,7 @@ Everything with a real impact on security of `VOTING Wahlvorschlag` – e.g.:
 - Social engineering
 - Physical attacks on people, buildings and devices
 - Issues that require physical access to a victim’s computer/device
+- User experience (UX) issues (e.g., incorrectly displayed text, layout or display problems, faulty views) with no direct impact on security.
 - For source code findings: Code smell or missing best practices
 - For system or infrastructure: Missing best practices or other guidelines which do not indicate a security issue.
 - Testing for weak credentials of prepared test users in the system
@@ -158,7 +159,7 @@ Everything with a real impact on security of `VOTING Wahlvorschlag` – e.g.:
 
 ### Reward Grid
 
-The Abraxas Bug Bounty Grid defines in which framework and methodology bounties can be defined. It is based on the CVSS Scoring Model. Please note that in a normal, productive setting `VOTING Wahlvorschlag` is not exposed to the Internet. For the Public Bug Bounty, the following static grid is used.
+The Abraxas Bug Bounty Grid defines in which framework and methodology bounties can be defined. It is based on the CVSS Scoring Model. For the Public Bug Bounty, the following static grid is used.
 
 #### Bounties
 
@@ -166,6 +167,17 @@ The Abraxas Bug Bounty Grid defines in which framework and methodology bounties 
 |---|---|---|---|---|
 |1. VOTING Wahlvorschlag Service (Backend)<br />2. VOTING Wahlvorschlag WebApp (Frontend)|CHF 500|CHF 1'500|CHF 4'000|CHF 10'000|
 |3. IAM System|CHF 300|CHF 1'000|CHF 3'000|CHF 7'000|
+
+#### Scenarios
+
+Additionally, there are specific scenarios for which Abraxas is prepared to offer special bounties. These bounties apply to all scopes and will be paid instead of the above CVSS based bounties (and not additional to them), if applicable.
+
+|No.|Scenario|Examples|Bounty Range|
+|---|---|---|---|
+|1|The candidate list or individual candidate proposals for proportional or majority elections can be manipulated after being locked by the superior authority, that leads to a disruption of the ballot.| - The insertion of additional candidate proposals<br>- The removal of valid candidate proposals. <br>- Adjustments to the content of individual candidate proposals.| CHF 10'000 - CHF 30'000|
+
+Rewards are distributed at the discretion of Abraxas.
+
 
 #### Eligibility Bounties
 
