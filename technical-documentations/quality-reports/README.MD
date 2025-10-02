@@ -12,7 +12,7 @@ The quality profiles used for this are stored in the [sonar-quality-profiles](./
 
 ### Version
 
-v2.10.13
+v2.12.10
 
 ### Quality Report
 
@@ -29,7 +29,7 @@ v2.10.13
 
 ### Version
 
-v4.4.9
+v4.5.7
 
 ### Quality Report
 
